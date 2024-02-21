@@ -1,32 +1,37 @@
 import cv2
 import requests
-from io import BytesIO
 import numpy as np
+import json
 
 # URL of the Flask server
-flask_url = "http://127.0.0.1:8080/video_feed"
+
 
 def show_video():
-    
     while True:
-        
+        try:
+            frame= cv2.imread('pic.jpg')
+            cv2.imshow("Video Stream", frame)
+        except Exception as E:
+            print(E)
         # Request video stream from Flask server
-        response = requests.get(flask_url, stream=True)
-        print(response)
-        if not response.ok:
-            
-            print("Error receiving video stream")
-            break
+        # response = requests.get(flask_url, stream=True)
+        # print(response)
+
+    #     if not response.ok:
+    #         print("Error receiving video stream")
+    #         break
         
-        # Read the frame as an image
+    #     # Decode the image directly from response content
+    #     frame = cv2.imdecode(np.frombuffer(response.content, np.uint8), -1)
         
-        image_bytes = BytesIO(response.content) #ติด
-        print("sjfkljdsjklsajfd")
-        frame = cv2.imdecode(np.frombuffer(image_bytes.read(), np.uint8), -1)
+    #     # Check for errors in decoding
+    #     if frame is None:
+    #         print("Error decoding frame")
+    #         break
+
+    #     # Display the frame
        
-        # Display the frame
-        cv2.imshow("Video Stream", frame)
-        
+
         # Exit on 'q' key press
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
@@ -34,5 +39,4 @@ def show_video():
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    
     show_video()

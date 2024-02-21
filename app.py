@@ -25,19 +25,27 @@ def gen_frames():
     while True:
         
         success, frame = camera.read()
+        frame_with_faces = detect_faces(frame)
+        
+        try:
+            cv2.imwrite('pic.jpg',frame)
+        except Exception as E:
+            print (E)
         if not success:
             break
         else:
             
-            frame_with_faces = detect_faces(frame)
+            
             ret, buffer = cv2.imencode('.jpg', frame_with_faces)
             frame = buffer.tobytes()
+            
             yield (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+        
 
 @app.route('/video_feed')
 def video_feed():
-    print(gen_frames())
+    
     return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route('/')
