@@ -2,10 +2,11 @@ import cv2
 
 
 # define a video capture object 
-vid = cv2.VideoCapture(0) 
+# vid = cv2.VideoCapture(0) 
 
 while(True): 
-	ret, frame = vid.read() 	
+	# ret, frame = vid.read() 	
+ 	frame = cv2.imread("pic.jpg")
 	cv2.imshow('frame', frame) 
 	if cv2.waitKey(1) & 0xFF == ord('q'): 
 		break

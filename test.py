@@ -4,12 +4,13 @@ import numpy as np
 import json
 
 # URL of the Flask server
-
+camera = cv2.VideoCapture(0)  
 
 def show_video():
     while True:
         try:
-            frame= cv2.imread('pic.jpg')
+            success, frame = camera.read()
+            # frame= cv2.imread('pic.jpg')
             cv2.imshow("Video Stream", frame)
         except Exception as E:
             print(E)
