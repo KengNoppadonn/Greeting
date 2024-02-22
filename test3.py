@@ -15,7 +15,7 @@ while True:
             except Exception as e:
                 print(f"Error: {e}")
     except Exception as e:
-                print(f"Error: {e}asfdadsf")
+                print(f"Error: {e}")
 
 
 
@@ -30,7 +30,7 @@ while True:
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
     except Exception as e:
-        print(f"Error: {e}")
+        print(f"Error: {e}54645644655564654")
 
 # Close all windows
 cv2.destroyAllWindows()
